@@ -810,6 +810,11 @@ service shutdown /system/bin/shutdown
     user root
     group root
     disabled
+
+service NvRAMAgent /system/bin/nvram_agent_binder
+    class main
+    user system
+    group system
 											 
 service thermal_manager /system/bin/thermal_manager
     class main
