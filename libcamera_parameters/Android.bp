@@ -8,7 +8,7 @@ cc_library_static {
     export_include_dirs: ["."],
 
     include_dirs: [
-        "device/huawei/h30u10/include",
+        "device/micromax/a106/include",
     ]
 }
 
