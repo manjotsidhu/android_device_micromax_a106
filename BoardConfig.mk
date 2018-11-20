@@ -76,10 +76,6 @@ BOARD_HAVE_BLUETOOTH_MTK := true
 BOARD_BLUETOOTH_DOES_NOT_USE_RFKILL := true
 BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := $(LOCAL_PATH)/bluetooth
 
-# EGL settings
-#BOARD_EGL_CFG := $(DEVICE_FOLDER)/egl.cfg
-#USE_OPENGL_RENDERER := true
-
 # OpenGL
 USE_OPENGL_RENDERER := true
 TARGET_HAS_LEGACY_CAMERA_HAL1 := true
@@ -137,14 +133,19 @@ BOARD_RIL_CLASS := ../../../$(LOCAL_PATH)/ril/
 
 TARGET_USERIMAGES_USE_EXT4:=true
 USE_CAMERA_STUB := true
+USE_MTK_CAMERA_WRAPPER := true
+TARGET_SPECIFIC_CAMERA_PARAMETER_LIBRARY := libcamera_parameters_mtk
+TARGET_SPECIFIC_HEADER_PATH := $(LOCAL_PATH)/include
 
 # SELinux
-BOARD_SEPOLICY_DIRS += \
-    device/micromax/a106/sepolicy
-    
-# Symbols for Sprout
-LINKER_FORCED_SHIM_LIBS := /system/lib/libcam_utils.so|libshim_atomic.so
-LINKER_FORCED_SHIM_LIBS += /system/lib/librilmtk.so|libshim_ril.so
+#BOARD_SEPOLICY_DIRS += \
+#    device/micromax/a106/sepolicy
+
+# Symbols
+TARGET_LD_SHIM_LIBS := \
+	/system/lib/libcam_utils.so|libshim_camera.so \
+	/system/lib/librilmtk.so|libshim_ril.so \
+	/system/lib/libshim_sensor.so
 
 # Hack for build
 $(shell mkdir -p $(OUT)/obj/KERNEL_OBJ/usr)

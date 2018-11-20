@@ -26,3 +26,5 @@ TARGET_SCREEN_WIDTH := 480
 
 # Release name
 PRODUCT_RELEASE_NAME := Unite 2
+# Root options
+WITH_SU=true

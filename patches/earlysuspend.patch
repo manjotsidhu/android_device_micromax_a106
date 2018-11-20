@@ -271,3 +271,4 @@ index 000000000..579de5227
 +    close(sPowerStatefd);
 +    return NULL;
 +}
++

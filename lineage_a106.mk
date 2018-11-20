@@ -85,15 +85,15 @@ PRODUCT_TAGS += dalvik.gc.type-precise
 
 # RAMDISK
 PRODUCT_COPY_FILES += \
-    device/micromax/a106/rootdir/root/init.sprout_common.rc:root/init.sprout_common.rc \
+    device/micromax/a106/rootdir/root/init.a106_common.rc:root/init.a106_common.rc \
     device/micromax/a106/rootdir/root/sbin/multi_init:root/sbin/multi_init \
     device/micromax/a106/rootdir/root/init.protect.rc:root/init.protect.rc \
-    device/micromax/a106/rootdir/root/fstab.sprout:root/fstab.sprout \
+    device/micromax/a106/rootdir/root/fstab.a106:root/fstab.a106 \
     device/micromax/a106/rootdir/root/init.modem.rc:root/init.modem.rc \
     device/micromax/a106/rootdir/root/factory_init.rc:root/factory_init.rc \
-    device/micromax/a106/rootdir/root/ueventd.sprout.rc:root/ueventd.sprout.rc \
-    device/micromax/a106/rootdir/root/init.sprout.usb.rc:root/init.sprout.usb.rc \
-    device/micromax/a106/rootdir/root/init.sprout.rc:root/init.sprout.rc 
+    device/micromax/a106/rootdir/root/ueventd.a106.rc:root/ueventd.a106.rc \
+    device/micromax/a106/rootdir/root/init.a106.usb.rc:root/init.a106.usb.rc \
+    device/micromax/a106/rootdir/root/init.a106.rc:root/init.a106.rc 
 
 PRODUCT_PACKAGES += \
     audio.a2dp.default \
@@ -103,6 +103,9 @@ PRODUCT_PACKAGES += \
     tinymix \
     android.hardware.audio@2.0-impl \
     android.hardware.audio.effect@2.0-impl
+
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.telephony.ril_class=SproutRIL
 
 # Bluetooth
 PRODUCT_PACKAGES += \
@@ -116,10 +119,11 @@ TARGET_BOOTANIMATION_MULTITHREAD_DECODE := true
 PRODUCT_PACKAGES += \
     android.hardware.light@2.0-impl \
     android.hardware.light@2.0-service
+    
 
-# FM Radio
-PRODUCT_PACKAGES += \
-	FMRadio
+# FMRadio
+#PRODUCT_PACKAGES += \
+#	FMRadio
 
 # Display
 PRODUCT_PACKAGES += \
@@ -129,11 +133,12 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
 	Snap
 
-#PRODUCT_PACKAGES += \
-#    camera.device@1.0-impl \
-#    camera.device@3.2-impl \
-#    android.hardware.camera.provider@2.4-impl \
-#    android.hardware.camera.provider@2.4-service
+PRODUCT_PACKAGES += \
+    libcam.client \
+    camera.device@1.0-impl \
+    camera.device@3.2-impl \
+    android.hardware.camera.provider@2.4-impl \
+    android.hardware.camera.provider@2.4-service
 
 # Wifi
 PRODUCT_PACKAGES += \
@@ -177,10 +182,10 @@ PRODUCT_PACKAGES += \
     android.hardware.usb@1.0-service
 
 # Sensors
-#PRODUCT_PACKAGES += \
-#    android.hardware.sensors@1.0-impl \
-#    android.hardware.sensors@1.0-service \
-#    sensors.sprout
+PRODUCT_PACKAGES += \
+    android.hardware.sensors@1.0-impl \
+    android.hardware.sensors@1.0-service \
+    sensors.a106
 
 PRODUCT_COPY_FILES += \
      $(LOCAL_PATH)/configs/_hals.conf:system/vendor/etc/sensors/_hals.conf
@@ -213,11 +218,19 @@ PRODUCT_PACKAGES += \
     libshim_camera \
     libshim_bionic \
     libshim_atomic \
+    libshim_sensor \
     libxlog
-    
+
+# MTK Helpers
+#PRODUCT_PACKAGES += \
+#    libcam.client
+
 # Vendor Interface Manifest
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/manifest.xml:system/vendor/manifest.xml
+
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/seccomp_policy/mediacodec.policy:system/vendor/etc/seccomp_policy/mediacodec.policy
 
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES := \
 	ro.crypto.state=unencrypted \
@@ -230,13 +243,13 @@ PRODUCT_DEFAULT_PROPERTY_OVERRIDES := \
 	persist.service.adb.enable=1 \
 	persist.service.debuggable=1 \
 	ro.zygote=zygote32 \
+	persist.media.treble_omx=false \
 	camera.disable_zsl_mode=1 \
 	dalvik.vm.dex2oat-Xms=64m \
 	dalvik.vm.dex2oat-Xmx=512m \
 	dalvik.vm.image-dex2oat-Xms=64m \
 	dalvik.vm.image-dex2oat-Xmx=64m \
 	ro.dalvik.vm.native.bridge=0 \
-	ro.telephony.ril_class=SproutRIL \
 	camera.disable_zsl_mode=1
 
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
