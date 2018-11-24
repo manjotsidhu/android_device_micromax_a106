@@ -52,7 +52,7 @@ BOARD_KERNEL_PAGESIZE := 2048
 #KERNEL_TOOLCHAIN_PREFIX := arm-eabi-
 #TARGET_PREBUILT_KERNEL := device/micromax/a106/kernel
 BOARD_KERNEL_IMAGE_NAME := zImage
-BOARD_CUSTOM_BOOTIMG_MK := device/micromax/a106/tools/bootimg.mk
+BOARD_CUSTOM_BOOTIMG_MK := /tools/bootimg.mk
 
 # Fstab for TWRP
 #TARGET_RECOVERY_FSTAB := $(LOCAL_PATH)/rootdir/root/twrp.fstab
